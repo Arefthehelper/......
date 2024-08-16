@@ -1,0 +1,75 @@
+To install the Android SDK (Software Development Kit) and NDK (Native Development Kit) on your Windows laptop, follow these steps:
+
+### 1. Install Java Development Kit (JDK)
+The Android SDK requires Java, so start by installing the JDK:
+
+1. Download the JDK from the [Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or use OpenJDK from the [AdoptOpenJDK website](https://adoptopenjdk.net/).
+2. Install the JDK by running the installer and following the prompts.
+
+### 2. Download Android Studio
+The easiest way to get the Android SDK and NDK is by installing Android Studio, which includes the SDK by default and provides an easy way to manage NDK installations.
+
+1. Visit the [Android Studio download page](https://developer.android.com/studio).
+2. Download the installer for Windows.
+3. Run the installer and follow the prompts to install Android Studio. During installation, make sure the option to install the Android SDK is checked.
+
+### 3. Set Up the SDK and NDK
+
+#### Option 1: Using Android Studio (Recommended)
+
+1. **Open Android Studio**:
+   - Open Android Studio and complete the initial setup wizard.
+   - During setup, it will download the necessary SDK components.
+
+2. **Install SDK Components**:
+   - Go to **File > Settings > Appearance & Behavior > System Settings > Android SDK**.
+   - In the "SDK Platforms" tab, select the Android versions you want (e.g., Android 12.0 (S), Android 11.0 (R)).
+   - In the "SDK Tools" tab, select "Android SDK Build-Tools", "Android Emulator", "Android SDK Platform-Tools", and "NDK (Side by Side)".
+   - Click "Apply" to install the selected components.
+
+#### Option 2: Using Command Line Tools
+
+If you prefer not to install Android Studio, you can download the command-line tools:
+
+1. Download the Command Line Tools:
+   - Visit the [Android Studio download page](https://developer.android.com/studio#cmdline-tools).
+   - Scroll down to the "Command line tools only" section and download the package for Windows.
+
+2. Extract the Command Line Tools:
+   - Extract the downloaded `.zip` file to a directory, for example, `C:\android-sdk`.
+
+3. Set Up Environment Variables:
+   - Open the **System Properties** (Right-click on "This PC" > "Properties" > "Advanced system settings").
+   - Click on "Environment Variables".
+   - Add a new user variable named `ANDROID_HOME` with the value set to the SDK directory (e.g., `C:\android-sdk`).
+   - Add `%ANDROID_HOME%\cmdline-tools\latest\bin` and `%ANDROID_HOME%\platform-tools` to the `PATH` variable.
+
+4. Install SDK and NDK Components:
+   - Open a Command Prompt and navigate to the tools directory:
+     ```bash
+     cd C:\android-sdk\cmdline-tools\latest\bin
+     ```
+   - Use `sdkmanager` to install SDK and NDK components:
+     ```bash
+     sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.0" "ndk-bundle"
+     ```
+   - To install a specific NDK version, run:
+     ```bash
+     sdkmanager --install "ndk;23.1.7779620"  # Replace with the version you need
+     ```
+
+### 4. Verify the Installation
+
+To verify that everything is installed correctly:
+
+1. Open a Command Prompt.
+2. Run the following commands:
+   ```bash
+   adb --version
+   ndk-build --version
+   ```
+   This should display the version numbers of `adb` and `ndk-build`, confirming successful installation.
+
+### 5. Done!
+
+Your Windows laptop should now have the Android SDK and NDK installed, ready for development.
