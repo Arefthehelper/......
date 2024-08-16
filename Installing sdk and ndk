@@ -1,0 +1,103 @@
+To install the Android SDK (Software Development Kit) and NDK (Native Development Kit) on Ubuntu 24.04, you can follow these steps:
+
+### 1. Install Java Development Kit (JDK)
+The Android SDK requires Java, so start by installing the JDK:
+
+```bash
+sudo apt update
+sudo apt install openjdk-11-jdk
+```
+
+### 2. Download Android Command Line Tools
+The Android SDK can be installed via the command line tools. Download the command-line tools from the official Android developer website:
+
+1. Visit the [Android Studio Download page](https://developer.android.com/studio).
+2. Scroll down to the "Command line tools only" section.
+3. Download the Linux package.
+
+You can also use `wget` to download the package directly:
+
+```bash
+wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+```
+
+### 3. Extract the Command Line Tools
+
+After downloading, extract the package:
+
+```bash
+unzip commandlinetools-linux-*.zip -d ~/android-sdk
+```
+
+### 4. Set Up Environment Variables
+
+Add the Android SDK tools to your system path. Open your `.bashrc` or `.zshrc` file:
+
+```bash
+nano ~/.bashrc
+```
+
+Add the following lines at the end of the file:
+
+```bash
+# Android SDK
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+```
+
+Reload the shell:
+
+```bash
+source ~/.bashrc
+```
+
+### 5. Install the SDK Components
+
+With the command line tools installed, you can now use the `sdkmanager` to install the necessary components:
+
+```bash
+sdkmanager --sdk_root=$ANDROID_HOME --install "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+```
+
+Replace `android-33` and `build-tools;33.0.0` with the versions you need.
+
+### 6. Install the NDK
+
+To install the NDK:
+
+```bash
+sdkmanager --sdk_root=$ANDROID_HOME --install "ndk-bundle"
+```
+
+If you need a specific version of the NDK, you can list available versions and install one:
+
+```bash
+sdkmanager --list
+sdkmanager --sdk_root=$ANDROID_HOME --install "ndk;23.1.7779620"  # example for a specific version
+```
+
+### 7. Verify Installation
+
+To verify that the SDK and NDK are installed correctly, you can check the versions:
+
+```bash
+adb --version
+ndk-build --version
+```
+
+This should display the version numbers of the tools if the installation was successful.
+
+### 8. Optional: Install Android Studio
+
+If you also need the Android Studio IDE, you can install it via the following commands:
+
+```bash
+sudo snap install android-studio --classic
+```
+
+This will provide you with a complete Android development environment.
+
+### 9. Done!
+
+You should now have the Android SDK and NDK installed on your Ubuntu 24.04 system.
